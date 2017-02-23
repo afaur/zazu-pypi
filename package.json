@@ -3,9 +3,16 @@
   "version": "0.0.1",
   "main": "search.js",
   "license": "Unlicense",
+  "scripts": {
+    "test": "mocha test"
+  },
   "dependencies": {
     "fuzzyfind": "^2.0.0",
     "node-fetch": "^1.6.3",
     "xmlrpc": "^1.3.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }

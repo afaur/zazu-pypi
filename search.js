@@ -1,7 +1,16 @@
 const PyPi = require('./pypi')
-
 const pypi = new PyPi()
 
-pypi.search('dbcl').then((results) => {
-  console.log('Results: ', results)
-})
+module.exports = () => {
+  return (query, env = {}) => {
+    return pypi.search(query).then((results) => {
+      return results.map((result) => {
+        return {
+          icon: 'icon.png',
+          title: result.pkg,
+          subtitle: result.info,
+        }
+      })
+    })
+  }
+}

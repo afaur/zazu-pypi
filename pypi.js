@@ -7,6 +7,7 @@ const DEFAULT_URL = 'https://pypi.python.org/pypi'
 class PyPi {
   constructor () {
     this.client = xmlrpc.createSecureClient(DEFAULT_URL)
+    this.pkgResults = []
   }
 
   getPackages () {
@@ -21,40 +22,32 @@ class PyPi {
     })
   }
 
-  readPkgInfo () {
-  }
-
   search (query) {
+
+    const readResponse = (response) => {
+      return response.json()
+    }
+
+    const addPkgResult = (json) => {
+      this.pkgResults.push({
+        pkg: json['info']['name'],
+        info: json['info']['summary']
+      })
+    }
+
     return this.getPackages().then((results) => {
-
       let promise = Promise.resolve()
-      let pkgAndInfo = []
-
       fuzzyfind(query, results).slice(0, 5).forEach((pkg) => {
-
         promise = promise.then(() => {
-          return new Promise((resolve) => {
-
-            let pkgInfoUrl = `https://pypi.python.org/pypi/${pkg}/json`
-            fetch(pkgInfoUrl).then((response) => {
-              response.json().then((json) => {
-                pkgAndInfo.push({
-                  pkg: pkg,
-                  info: json['info']['summary']
-                })
-                resolve()
-              })
-            })
-
-          })
+          let pkgDetails = `https://pypi.python.org/pypi/${pkg}/json`
+          return fetch(pkgDetails).then(readResponse).then(addPkgResult)
         })
-
       })
-
       return promise.then((response) => {
-        return pkgAndInfo
+        return this.pkgResults
+      }).catch((e) => {
+        console.error('fail', e)
       })
-
     })
   }
 

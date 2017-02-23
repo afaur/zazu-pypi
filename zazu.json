@@ -1,19 +1,16 @@
 {
   "name": "zazu-pypi",
-  "version": "0.0.1",
-  "author": "afaur",
-  "description": "Python package (CheeseShop) searcher",
-  "homepage": "https://github.com/afaur/zazu-pypi",
-  "git": "git@github.com:afaur/zazu-pypi.git",
   "blocks": {
     "input": [
       {
         "id": "search",
-        "type": "RootScript",
+        "type": "PrefixScript",
+        "prefix": "pypi",
+        "space": true,
+        "args": "Required",
         "script": "search.js",
-        "connections": [
-          "open"
-        ]
+        "debounce": 100,
+        "connections": ["open"]
       }
     ],
     "output": [
