@@ -16,8 +16,8 @@
     "output": [
       {
         "id": "open",
-        "type": "UserScript",
-        "script": "open.js"
+        "type": "OpenInBrowser",
+        "url": "https://pypi.python.org/pypi/{value}"
       }
     ]
   }

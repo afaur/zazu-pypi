@@ -9,6 +9,7 @@ module.exports = () => {
           icon: 'icon.png',
           title: result.pkg,
           subtitle: result.info,
+          value: result.pkg,
         }
       })
     })
