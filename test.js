@@ -1,9 +1,10 @@
 const expect = require('chai').expect
 const search = require('./search')()
 
-describe('search', () => {
+describe('search', function () {
+  this.timeout(15000);
   it('returns results', () => {
-    search('dbcli').then((results) => {
+    return search('dbcli').then((results) => {
       expect(results[0].title).to.include('dbcli')
       expect(results[0].subtitle).to.include('')
     })
