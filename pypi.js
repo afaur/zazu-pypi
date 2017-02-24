@@ -23,13 +23,14 @@ class PyPi {
   }
 
   search (query) {
+    const packageResults = []
 
     const readResponse = (response) => {
       return response.json()
     }
 
     const addPkgResult = (json) => {
-      this.pkgResults.push({
+      packageResults.push({
         pkg: json['info']['name'],
         info: json['info']['summary']
       })
@@ -44,7 +45,7 @@ class PyPi {
         })
       })
       return promise.then((response) => {
-        return this.pkgResults
+        return packageResults
       }).catch((e) => {
         console.error('fail', e)
       })
