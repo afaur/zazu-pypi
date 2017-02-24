@@ -2,6 +2,7 @@ const PyPi = require('./pypi')
 const pypi = new PyPi()
 
 module.exports = () => {
+  pypi.getPackages()
   return (query, env = {}) => {
     return pypi.search(query).then((results) => {
       return results.map((result) => {

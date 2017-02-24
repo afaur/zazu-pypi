@@ -7,7 +7,6 @@ const DEFAULT_URL = 'https://pypi.python.org/pypi'
 class PyPi {
   constructor () {
     this.client = xmlrpc.createSecureClient(DEFAULT_URL)
-    this.pkgResults = []
   }
 
   getPackages () {
